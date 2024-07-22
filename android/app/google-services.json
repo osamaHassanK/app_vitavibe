@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "692372681998",
+    "project_id": "vitavibe-app",
+    "storage_bucket": "vitavibe-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692372681998:android:f39f16a9d17a4ac23a935f",
+        "android_client_info": {
+          "package_name": "com.example.app_vitavibe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfsHZ7ovHwz4haCZKGqjKb8uRjlVp6ZQs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
