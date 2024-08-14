@@ -6,9 +6,11 @@ enum LoginStatus { initial, loading, success, error, failure }
 class LoginState extends Equatable {
   final String email, password, message,forgetScreenEmail;
   final LoginStatus loginStatus;
+  final bool isShowingPassword;
 
   const LoginState(
       {
+        this.isShowingPassword = false,
         this.email = '',
         this.forgetScreenEmail='',
         this.password = '',
@@ -17,6 +19,7 @@ class LoginState extends Equatable {
       });
 
   LoginState copyWith({
+    bool? isShowingPassword,
     String? email,
     String?  message,
     String? password,
@@ -29,9 +32,10 @@ class LoginState extends Equatable {
       password: password ?? this.password,
       loginStatus: loginStatus ?? this.loginStatus,
       message: message ?? this.message,
+      isShowingPassword: isShowingPassword ?? this.isShowingPassword
     );
   }
 
   @override
-  List<Object?> get props => [email, password, loginStatus, message,forgetScreenEmail];
+  List<Object?> get props => [email, password, loginStatus, message,forgetScreenEmail,isShowingPassword];
 }

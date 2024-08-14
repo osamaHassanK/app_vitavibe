@@ -49,4 +49,8 @@ class NavigateToSignIn extends LoginScreen {
   NavigateToSignIn({super.key});
 }
 
+class ShowPassword extends LoginEvent{
+
+}
+
 class SignInWithGoogle extends LoginEvent {}

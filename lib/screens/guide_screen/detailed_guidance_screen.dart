@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:app_vitavibe/other/review_data/review_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
@@ -6,7 +9,7 @@ import '../../other/Theme/colors.dart';
 import '../../other/app_dimensions/app_dimensions.dart';
 import '../../other/widgets/text_widget.dart';
 
-class DetailedGuidanceScreen extends StatelessWidget {
+class DetailedGuidanceScreen extends StatefulWidget {
   final String supplementName,
       supplementUrl,
       supplementsDetails,
@@ -20,6 +23,18 @@ class DetailedGuidanceScreen extends StatelessWidget {
       required this.interactionWarningOfSupplement,
       required this.supplementDosage,
       required this.supplementsBenefits});
+
+  @override
+  State<DetailedGuidanceScreen> createState() => _DetailedGuidanceScreenState();
+}
+
+class _DetailedGuidanceScreenState extends State<DetailedGuidanceScreen> {
+  late ReviewData reviewData;
+  @override
+  void initState() {
+    super.initState();
+  reviewData= ReviewData.generateRandomReview();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,44 +57,49 @@ class DetailedGuidanceScreen extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    height: dimensions.height * 0.18,
-                    width: dimensions.width * 0.35,
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.black12), // Optional subtle border
-                      borderRadius:
-                          BorderRadius.circular(12), // Smooth rounded corners
-                      gradient: LinearGradient(
-                        // Add a gradient for visual interest
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.lightGreenAccent.shade200,
-                          Colors.tealAccent.shade400,
+                      height: dimensions.height * 0.18,
+                      width: dimensions.width * 0.35,
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 5),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.black12), // Optional subtle border
+                        borderRadius:
+                            BorderRadius.circular(12), // Smooth rounded corners
+                        gradient: LinearGradient(
+                          // Add a gradient for visual interest
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.lightGreenAccent.shade200,
+                            Colors.tealAccent.shade400,
+                          ],
+                        ),
+                        boxShadow: [
+                          // Subtle shadow for depth
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
                         ],
                       ),
-                      boxShadow: [
-                        // Subtle shadow for depth
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.supplementUrl,
+                          placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator(
+                            color: AppColor.primaryColor,
+                          )),
+                          errorWidget: (context, url, error) => Image.asset(
+                            'assets/images/s.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                      ],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: CachedNetworkImage(
-                        imageUrl: supplementUrl,
-                        placeholder: (context, url) => Center(child: CircularProgressIndicator(color: AppColor.primaryColor,)),
-                        errorWidget: (context, url, error) => Image.asset('assets/images/s.jpg',fit: BoxFit.cover,),
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  ),
+                      )),
                   Container(
                     width: dimensions.width * 0.56,
                     height: dimensions.height * 0.18,
@@ -91,7 +111,7 @@ class DetailedGuidanceScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          supplementName,
+                          widget.supplementName,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
@@ -162,7 +182,7 @@ class DetailedGuidanceScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        supplementsDetails,
+                        widget.supplementsDetails,
                         // 'Here are more detailed information about the Ancient Nutrient product. This section can be used to provide extensive details about the product, including its benefits, possible side effects, and other relevant information that would help the user make an informed decision.',
                         style: TextStyle(fontSize: 14),
                       ),
@@ -176,7 +196,7 @@ class DetailedGuidanceScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        supplementsBenefits,
+                        widget.supplementsBenefits,
                         //'1. Improves digestion.\n2. Boosts immune system.\n3. Provides essential vitamins and minerals.',
                         style: TextStyle(fontSize: 14),
                       ),
@@ -190,7 +210,7 @@ class DetailedGuidanceScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        interactionWarningOfSupplement,
+                        widget.interactionWarningOfSupplement,
                         //1. May interact with blood-thinning medications.\n2. Consult with your healthcare provider before starting any new supplement.',
                         style: TextStyle(fontSize: 14),
                       ),
@@ -204,7 +224,7 @@ class DetailedGuidanceScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        supplementDosage,
+                        widget.supplementDosage,
                         //  'Take one capsule daily with meals or as directed by your healthcare provider.',
                         style: TextStyle(fontSize: 14),
                       ),
@@ -227,8 +247,8 @@ class DetailedGuidanceScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Jane Doe',
+                             Text(
+                              reviewData.reviewersName,
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -236,9 +256,9 @@ class DetailedGuidanceScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 2),
                             SmoothStarRating(
-                              allowHalfRating: false,
+                              allowHalfRating: true,
                               starCount: 5,
-                              rating: 4,
+                              rating: reviewData.reviewersRating,
                               size: 15.0,
                               filledIconData: Icons.star,
                               halfFilledIconData: Icons.star_half,
@@ -247,8 +267,8 @@ class DetailedGuidanceScreen extends StatelessWidget {
                               spacing: 0.0,
                             ),
                             const SizedBox(height: 2),
-                            const Text(
-                              'Great product! I feel more energetic and my digestion has improved.',
+                            Text(
+                              reviewData.reviewersReviews,
                               style: TextStyle(fontSize: 14),
                             ),
                           ],

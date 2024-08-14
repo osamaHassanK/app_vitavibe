@@ -1,4 +1,6 @@
 import 'package:app_vitavibe/bloc/login_bloc/login_event.dart';
+import 'package:app_vitavibe/other/firebase/add_notification/add_notification_firebase.dart';
+import 'package:app_vitavibe/other/notification_service/notification_service.dart';
 import 'package:app_vitavibe/other/widgets/loginwithgoogle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,11 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 );
               }else if (state.loginStatus == LoginStatus.success) {
+                NotificationService.showNotification(title: "VitaVibe", body: "You Successfully Logged in");
+                AddNotificationFirebase.addNotificationToFirebase(notification: 'You successfully logged in');
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.pushNamedAndRemoveUntil(
                     context,
-                    MaterialPageRoute<void>(builder: (context) => const Dashboard()),
-                        (Route<dynamic> route) => false, // This predicate will remove all previous routes
+                    '/dashboard',
+                        (Route<dynamic> route) => false,
                   );
                 });
               }
@@ -89,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocBuilder<LoginBloc, LoginState>(
                             builder: (context, state) {
                               return CustomTextFormField(
+                                isShowIcon: false,
                                 hintText: 'Email',
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -103,32 +108,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                   context
                                       .read<LoginBloc>()
                                       .add(ChangeEmail(email: email));
-                                },
+                                }, showPass: () {  },
                               );
                             },
                           ),
-                          BlocBuilder<LoginBloc, LoginState>(
-                            builder: (context, state) {
-                              return CustomTextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                isPassword: true,
-                                hintText: 'Password',
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your password';
-                                  }
-                                  return null;
-                                },
-                                onChanged: (password) {
-                                  context
-                                      .read<LoginBloc>()
-                                      .add(
-                                      ChangePassword(password: password));
-                                },
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 10),
+                        BlocBuilder<LoginBloc, LoginState>(
+                          builder: (context, state) {
+                            return CustomTextFormField(
+                              isShowIcon: true,
+                              keyboardType: TextInputType.emailAddress,
+                              isPassword: !state.isShowingPassword, // Update this line
+                              hintText: 'Password',
+                              showPass: () {
+                                context.read<LoginBloc>().add(ShowPassword());
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                return null;
+                              },
+                              onChanged: (password) {
+                                context.read<LoginBloc>().add(ChangePassword(password: password));
+                              },
+                            );
+                          },
+                        ),
+                          if (state.message.isNotEmpty)
+                            Text(
+                              state.message,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                        const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [

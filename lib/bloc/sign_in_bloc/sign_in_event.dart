@@ -42,3 +42,15 @@ class RegisteredUser extends SignInEvent{
 class SignInWithGoogle extends SignInEvent{
 
 }
+class TogglePasswordVisibility1 extends SignInEvent {
+  const TogglePasswordVisibility1();
+
+  @override
+  List<Object> get props => [];
+}
+class TogglePasswordVisibility2 extends SignInEvent {
+  const TogglePasswordVisibility2();
+
+  @override
+  List<Object> get props => [];
+}

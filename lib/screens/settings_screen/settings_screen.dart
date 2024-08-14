@@ -1,6 +1,10 @@
+import 'package:app_vitavibe/other/notification_service/notification_service.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
+import '../../other/models/reminder_model.dart';
 import '../../other/widgets/text_widget.dart';
 import '../login_screen/login_screen.dart';
 
@@ -12,6 +16,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 1,
         centerTitle: true,
         backgroundColor: Colors.white,
         title: const TextWidget(text: 'Settings', fontSize: 24),
@@ -86,8 +91,11 @@ class SettingsScreen extends StatelessWidget {
               leading: const Icon(Icons.logout,color: Colors.black,),
               title: const Text('Logout'),
               onTap: () async {
+                final Box<Reminder> reminderBox = Hive.box<Reminder>('reminderBox');
                 try {
                   await FirebaseAuth.instance.signOut();
+                  await reminderBox.clear();
+                  await AwesomeNotifications().cancelAllSchedules();
                   Navigator.pushAndRemoveUntil<void>(
                     context,
                     MaterialPageRoute<void>(builder: (BuildContext context) =>  LoginScreen()),

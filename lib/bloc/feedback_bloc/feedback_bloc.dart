@@ -1,9 +1,9 @@
-import 'dart:math';
-
-import 'package:app_vitavibe/other/firebase/addfeedback.dart';
+import 'package:app_vitavibe/other/firebase/add_feedback/addfeedback.dart';
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../other/firebase/add_notification/add_notification_firebase.dart';
+import '../../other/notification_service/flutter_local_noti/init_function.dart';
+import '../../other/notification_service/notification_service.dart';
 import 'feedback_event.dart';
 import 'feedback_state.dart';
 
@@ -29,6 +29,15 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
       if (user != null) {
         await addFeedback(user.email??'user Feedback' , state.feedback);
         emit(state.copyWith(feedbackStatus: FeedbackStatus.feedbackSubmitted));
+
+        final localNotification = FlutterLocalNotification();
+        int id =0;
+        localNotification.showNotification(id++, "VitaVibe",
+          "Feedback sent successfully", );
+
+        AddNotificationFirebase.addNotificationToFirebase(
+            notification:
+            'Feedback sent successfully');
       } else {
         emit(state.copyWith(feedbackStatus: FeedbackStatus.feedbackFailed,message: 'No feedback to submit.'));
         }

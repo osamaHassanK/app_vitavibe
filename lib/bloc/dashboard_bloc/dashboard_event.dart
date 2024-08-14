@@ -12,6 +12,13 @@ class SearchSupplement extends DashboardEvent {
   SearchSupplement(this.searchBarValue);
 }
 
+class ShowNotificationOverlay extends DashboardEvent {
+  final bool isOverlayOpen;
+  ShowNotificationOverlay({required this.isOverlayOpen});
+  @override
+  List<Object?> get props => [isOverlayOpen];
+}
+
 class TabUpdated extends DashboardEvent {
   final int index;
 

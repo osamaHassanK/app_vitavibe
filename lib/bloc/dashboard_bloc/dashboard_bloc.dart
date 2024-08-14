@@ -7,8 +7,13 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   DashboardBloc() : super(const DashboardState()) {
     on<TabUpdated>(_tabUpdatedToggle);
     on<SearchSupplement>(_changeInSearchBar);
+    on<ShowNotificationOverlay>(_openAndCloseNotificationOverlay);
   }
 
+  void _openAndCloseNotificationOverlay(ShowNotificationOverlay event, Emitter<DashboardState> emit) {
+    emit(state.copyWith(isOverlayOpenValue: !state.isOverlayOpenValue));
+    print('Overlay open: ${!state.isOverlayOpenValue}');
+  }
   void _changeInSearchBar(SearchSupplement event,Emitter<DashboardState> emit){
     emit(state.copyWith(searchBarValue: event.searchBarValue));
   }

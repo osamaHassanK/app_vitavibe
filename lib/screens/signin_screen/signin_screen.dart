@@ -1,6 +1,6 @@
 import 'package:app_vitavibe/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:app_vitavibe/other/Theme/colors.dart';
-import 'package:app_vitavibe/other/firebase/register_user_method.dart';
+import 'package:app_vitavibe/other/firebase/registeration_method/register_user_method.dart';
 import 'package:app_vitavibe/screens/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,6 +90,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             buildWhen: (current,previous)=>current.email!=previous.email,
                             builder: (context, state) {
                               return CustomTextFormField(
+                                isShowIcon: false,
                                 keyboardType: TextInputType.name,
                                 hintText: 'Name',
                                 onChanged:(value){
@@ -100,13 +101,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     return 'Please enter your name';
                                   }
                                   return null;
-                                },
+                                }, showPass: () {  },
                               );
                             },
                           ),
                           BlocBuilder<SignInBloc, SignInState>(
                             builder: (context, state) {
                               return CustomTextFormField(
+                                isShowIcon: false,
                                 keyboardType: TextInputType.emailAddress,
                                 hintText: 'Email',
                                 onChanged: (value) {
@@ -119,36 +121,42 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     return 'Please enter a valid email';
                                   }
                                   return null;
-                                },
+                                }, showPass: () {  },
                               );
                             },
                           ),
                           CustomTextFormField(
+                            isShowIcon: true,
                             hintText: 'Password',
                             keyboardType: TextInputType.visiblePassword,
                             onChanged: (value) => context
                                 .read<SignInBloc>()
                                 .add(PasswordChanged(passwordChanged: value)),
-                            isPassword: true,
+                            isPassword: state.isPasswordVisible1,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please enter your name';
                               }
                               return null;
-                            },
+                            },  showPass: () {
+                            context.read<SignInBloc>().add(TogglePasswordVisibility1());
+                          },
                           ),
                           CustomTextFormField(
+                            isShowIcon: true,
                             hintText: 'Confirm Password',
                             onChanged: (value) => context
                                 .read<SignInBloc>()
                                 .add(ConfirmPasswordChanged(confirmPasswordChanged:value)),
-                            isPassword: true,
+                            isPassword: state.isPasswordVisible2,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Please enter your name';
                               }
                               return null;
-                            },
+                            }, showPass: () {
+                            context.read<SignInBloc>().add(TogglePasswordVisibility2());
+                          },
                           ),
                           SizedBox(
                             height: dimension.height * 0.03,

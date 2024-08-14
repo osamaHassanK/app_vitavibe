@@ -88,7 +88,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 SizedBox(height: dimension.height * 0.03),
                                 CustomTextFormField(
                                   hintText: 'Email',
-
+isShowIcon: false,
                                   validator: (value) {
                                     if (value!.isEmpty) {
                                       return 'Please enter your email';
@@ -101,7 +101,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   onChanged: (email) {
                                     print(email);
                                     context.read<LoginBloc>().add(ForgetPasswordEmailChangeEvent(forgetEmail: email));
-                                  },
+                                  }, showPass: () {  },
                                 ),
                                 SizedBox(height: dimension.height * 0.02),
                                 GlowingButton(

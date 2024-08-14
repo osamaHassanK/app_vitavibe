@@ -4,6 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/cupertino.dart';
+import '../../other/firebase/add_notification/add_notification_firebase.dart';
+import '../../other/notification_service/flutter_local_noti/init_function.dart';
+import '../../other/notification_service/notification_service.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
 
@@ -35,6 +39,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       await ref.putFile(imageFile);
       String imageUrl = await ref.getDownloadURL();
+      final localNotification = FlutterLocalNotification();
+      int id = 0;
+
+      localNotification.showNotification(
+        id++,
+        "VitaVibe",
+        "Profile updated successfully",
+      );
+
+      AddNotificationFirebase.addNotificationToFirebase(
+          notification:
+          'Profile updated successfully');
       return imageUrl;
     } catch (e) {
       throw Exception('Error uploading image to Firebase Storage: $e');
@@ -51,7 +67,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           .doc(userId)
           .set({'profileImageUrl': imageUrl}, SetOptions(merge: true));
 
-      print('Image URL saved to Firestore');
+      debugPrint('Image URL saved to Firestore');
     } catch (e) {
       throw Exception('Error saving image URL to Firestore: $e');
     }
