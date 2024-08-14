@@ -18,7 +18,8 @@ void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
     switch (task) {
       case 'newTask':
-        NotificationService.showNotification(title: 'New task', body: "App is alive");
+       // NotificationService.showNotification(title: 'New task', body: "App is alive");
+      // uncomment if you want to check
         break;
     }
 
@@ -41,12 +42,16 @@ void main() async {
     "1",
     "newTask",
     frequency: Duration(minutes: 15),
-  ).then((value) => NotificationService.showNotification(title: 'new Task Status WorkManager',
-      body:'periodic task registered'))
-      .catchError((e) => NotificationService.showNotification(title: 'new Task Status WorkManager',
-      body:'Error registering task: $e'));
+  ).then((value) =>
+    print('periodic task registered')
+    //testing =>  NotificationService.showNotification(title: 'new Task Status WorkManager', body:'periodic task registered')
+  )
+      .catchError((e) =>
+      print('Error registering task: $e')
+     //testing => NotificationService.showNotification(title: 'new Task Status WorkManager', body:'Error registering task: $e')
+  );
 
-  Workmanager().registerOneOffTask('vitavibe', 'newTask');
+  //testing => Workmanager().registerOneOffTask('vitavibe', 'newTask');
 
 
 

@@ -441,7 +441,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             //   enableNotificationOnKill: true,
                             // ));
 
-                            if ((_formKey.currentState?.validate() ?? false) && state.selectedWeekDays == []) {
+                            if ((_formKey.currentState?.validate() ?? false) && state.selectedWeekDays.isNotEmpty) {
                               context.read<ReminderBloc>().add(SaveReminderEvent());
                               Navigator.pushNamed(context, '/dashboard');
                             } else {

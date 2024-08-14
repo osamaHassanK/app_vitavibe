@@ -36,6 +36,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         builder: (context, state) {
           return SafeArea(
             child: Scaffold(
+              backgroundColor: Colors.white,
               body: BlocBuilder<LoginBloc, LoginState>(
                 builder: (context, state) {
                   if (state.loginStatus == LoginStatus.loading) {

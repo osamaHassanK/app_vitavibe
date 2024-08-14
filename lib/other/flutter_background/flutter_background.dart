@@ -19,10 +19,10 @@ class RunAppInBackground {
     bool success = await FlutterBackground.enableBackgroundExecution();
     FlutterLocalNotification localNotification = FlutterLocalNotification();
     if (success) {
-      localNotification.showNotification(0, 'Notification status','Background task started successfully');
+     // localNotification.showNotification(0, 'Notification status','Background task started successfully');
       print('Background task started successfully');
     } else {
-      localNotification.showNotification(0, 'Notification status','Handle failure to start background task');
+      //localNotification.showNotification(0, 'Notification status','Handle failure to start background task');
       print("Handle failure to start background task");
     }
   }
