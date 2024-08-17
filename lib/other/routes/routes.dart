@@ -1,3 +1,4 @@
+import 'package:app_vitavibe/screens/ai_based_medicine_suggestions/ai_based_medicine_suggestions.dart';
 import 'package:app_vitavibe/screens/feedback_screen/feedback_screen.dart';
 import 'package:app_vitavibe/screens/guide_screen/detailed_guidance_screen.dart';
 import 'package:app_vitavibe/screens/profile_screen/profile_screen.dart';
@@ -45,5 +46,6 @@ class Routes {
     '/feedback': (context) => AddFeedbackScreen(),
     '/addMedicine': (context) => AddMedicineScreen(),
     '/addReminder': (context) => const ReminderScreen(),
+    '/aiBasedMedicineSuggestions': (context) => const AiBasedMedicineSuggestions(),
   };
 }

@@ -2,6 +2,7 @@ import 'package:app_vitavibe/bloc/dashboard_bloc/dashboard_event.dart';
 import 'package:app_vitavibe/bloc/health_tip_bloc/health_tip_bloc.dart';
 import 'package:app_vitavibe/other/Theme/colors.dart';
 import 'package:app_vitavibe/other/app_dimensions/app_dimensions.dart';
+import 'package:app_vitavibe/other/widgets/glowingbuttonwidget.dart';
 import 'package:app_vitavibe/other/widgets/text_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -59,7 +60,26 @@ Widget guideScreenWidget(BuildContext context,
           //   ],
           // ),
           Padding(
-            padding: const EdgeInsets.only(top: 15,bottom: 10,left: 12),
+            padding: const EdgeInsets.only(top: 5,bottom: 0,left: 12,right: 10),
+            child: Row(
+              children: [
+                Text(
+                  'AI-Based Suggestions',
+                  style: TextStyle(
+                      color: AppColor.primaryColor,
+                      fontFamily: 'f',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+                Spacer(),
+                GlowingButton(onPressed: () {
+                  Navigator.pushNamed(context,'/aiBasedMedicineSuggestions' );
+                }, title: 'Click Here', height: dimensions.height*0.05, width:dimensions.width*0.25,)
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10,bottom: 10,left: 12),
             child: Text(
               'Health Tips',
               style: TextStyle(
