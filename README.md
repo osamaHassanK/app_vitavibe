@@ -1,16 +1,58 @@
-# app_vitavibe
+# Vitavibe Mobile Application
 
-A new Flutter project.
+Vitavibe is a Flutter-based mobile application designed to provide users with comprehensive supplement information. It features an AI chatbot that can answer questions related to supplements, medicines, or health-related queries. Additionally, users can set reminders to take their supplements or medicines.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Supplement Information**: Get detailed information about various supplements.
+- **AI Chatbot**: Ask questions about supplements, medicines, and health-related topics.
+- **Reminders**: Set and manage reminders for taking your supplements or medicines.
+- **User Authentication**: Secure sign-up and login using Firebase Authentication.
+- **Local Notifications**: Receive notifications for your reminders.
+- **State Management**: Efficient state management using the Bloc pattern.
+- **Local Storage**: Store data locally using Hive.
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter**: The framework used to build the mobile application.
+- **Bloc**: State management for managing app state efficiently.
+- **Hive**: Local storage solution for saving reminders and other data.
+- **Firebase**: Used for user authentication and backend services.
+- **Local Notifications Package**: For managing and displaying local notifications to the user.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/osamaHassank/app_vitavibe.git
+   cd vitavibe
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the app:**
+   ```bash
+   flutter run
+   ```
+
+## Usage
+
+1. **Sign up** or **Log in** to your account using Firebase Authentication.
+2. **Explore** the supplements and get detailed information.
+3. **Chat** with the AI chatbot for any queries related to supplements and health.
+4. **Set reminders** for your supplements or medicines and receive timely notifications.
+
+## Contributing
+
+Contributions are welcome! Please fork this repository and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contact
+
+For any questions or suggestions, feel free to contact me at osamaokteck@gmail.com | okhan9060@gmail.com.
