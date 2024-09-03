@@ -53,7 +53,7 @@ dependencies:
   firebase_ui_firestore: ^1.6.4
   awesome_notifications: ^0.9.3+1
   intl: ^0.19.0
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   firebase_messaging: ^15.0.4
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -62,10 +62,10 @@ dependencies:
   audioplayers: ^6.0.0
   uri_to_file: ^1.0.0
   assets_audio_player: ^3.1.1
-  flutter_local_notifications: ^17.2.1+2
+  flutter_local_notifications: ^17.2.2
   timezone: ^0.9.4
   flutter_timezone: ^2.1.0
-  flutter_background: ^1.2.0
+  #flutter_background: ^1.2.0
   workmanager: ^0.5.2
   alarm: ^3.1.5
   google_generative_ai: ^0.4.4
@@ -88,7 +88,7 @@ flutter_native_splash:
     icon_background_color: "#ffffff"
     image_dark: assets/icons/splash_icon.png
     icon_background_color_dark: "#ffffff"
-
+    flutter_scripts:
 
 flutter_icons:
   android: true
@@ -148,3 +148,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+scripts:
+  generate_icons: dart run flutter_launcher_icons
+  generate_files: dart run build_runner build --delete-conflicting-outputs
+  watch: dart run build_runner build watch --delete-conflicting-outputs
+  buildApk: flutter clean && flutter build apk
+  buildAbb: flutter clean && flutter build appbundle

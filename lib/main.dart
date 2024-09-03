@@ -1,4 +1,5 @@
 import 'package:alarm/alarm.dart';
+import 'package:app_vitavibe/helpers/notification_scheduler_helper.dart';
 import 'package:app_vitavibe/other/firebase/initialize_firebase_app/initialize_firebase_app.dart';
 import 'package:app_vitavibe/other/flutter_background/flutter_background.dart';
 import 'package:app_vitavibe/other/notification_service/flutter_local_noti/init_function.dart';
@@ -14,22 +15,38 @@ import 'other/local_time_zone/configure_local_time_zone.dart';
 import 'other/models/reminder_model.dart';
 import 'other/routes/routes.dart';
 
+
+NotificationSchedulerHelper notificationSchedulerHelper=NotificationSchedulerHelper();
+@pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
-    switch (task) {
-      case 'newTask':
-       // NotificationService.showNotification(title: 'New task', body: "App is alive");
-      // uncomment if you want to check
-        break;
+    if (task == 'periodicNotification') {
+      checkAndShowNotification();
     }
-
     return Future.value(true);
   });
 }
 
+
+
+Future<void> checkAndShowNotification() async {
+  final DateTime now = DateTime.now();
+  final List<int> reminderDays = [1, 2, 3, 4, 5]; // Monday, Tuesday, Wednesday, Thursday, Friday
+  final int reminderHour = 9;
+  final int reminderMinute = 0;
+
+  if (reminderDays.contains(now.weekday) )
+    // &&
+    //   now.hour == reminderHour &&
+    //   now.minute == reminderMinute)
+  {
+    notificationSchedulerHelper.showPeriodicNotification();
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  Workmanager().initialize(callbackDispatcher);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -37,27 +54,15 @@ void main() async {
   await NotificationService.initializeNotification();
   await initializeFirebaseApp();
 
-  Workmanager().initialize(callbackDispatcher);
-  Workmanager().registerPeriodicTask(
-    "1",
-    "newTask",
-    frequency: Duration(minutes: 15),
-  ).then((value) =>
-    print('periodic task registered')
-    //testing =>  NotificationService.showNotification(title: 'new Task Status WorkManager', body:'periodic task registered')
-  )
-      .catchError((e) =>
-      print('Error registering task: $e')
-     //testing => NotificationService.showNotification(title: 'new Task Status WorkManager', body:'Error registering task: $e')
-  );
+
 
   //testing => Workmanager().registerOneOffTask('vitavibe', 'newTask');
 
 
 
-  final runAppInBackground = RunAppInBackground();
-  await runAppInBackground.initialize();
-  await runAppInBackground.startBackgroundTask();
+  // final runAppInBackground = RunAppInBackground();
+  // await runAppInBackground.initialize();
+  // await runAppInBackground.startBackgroundTask();
 
   await Alarm.init();
 

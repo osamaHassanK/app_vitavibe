@@ -52,7 +52,7 @@ class MedicineTypeChanged extends ReminderEvent {
 }
 
 class WeekDaysSelected extends ReminderEvent {
-  final List<String> selectedDays;
+  final List<int> selectedDays;
 
   WeekDaysSelected(this.selectedDays);
 

@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'package:app_vitavibe/main.dart';
 import 'package:app_vitavibe/other/hive/id_generator/id_generator.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bloc/bloc.dart';
@@ -9,7 +10,9 @@ import 'package:workmanager/workmanager.dart';
 import '../../other/models/reminder_model.dart';
 import '../../other/notification_service/notification_helper.dart';
 import '../../other/notification_service/notification_service.dart';
+
 part 'reminder_event.dart';
+
 part 'reminder_state.dart';
 
 class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
@@ -29,7 +32,8 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
     add(FetchRemindersEvent());
   }
 
-  void _fetchRemindersEvent(FetchRemindersEvent event, Emitter<ReminderState> emit) async {
+  void _fetchRemindersEvent(FetchRemindersEvent event,
+      Emitter<ReminderState> emit) async {
     emit(state.copyWith(status: ReminderStatus.loading));
 
     try {
@@ -51,8 +55,8 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
   }
 
 
-  void _deleteReminderMethod(
-      DeleteReminderEvent event, Emitter<ReminderState> emit) async {
+  void _deleteReminderMethod(DeleteReminderEvent event,
+      Emitter<ReminderState> emit) async {
     emit(state.copyWith(status: ReminderStatus.loading));
 
     try {
@@ -68,7 +72,8 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
         await reminderBox.deleteAt(event.reminderIndex);
 
         // Update state with the updated list of reminders
-        final updatedReminders = List<Reminder>.from(state.reminders as Iterable)
+        final updatedReminders = List<Reminder>.from(
+            state.reminders as Iterable)
           ..removeAt(event.reminderIndex);
         emit(state.copyWith(
           status: ReminderStatus.success,
@@ -89,33 +94,42 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
   }
 
 
-
-
   void _selectedSound(AudioFileSelected event, Emitter<ReminderState> emit) {
     emit(state.copyWith(audioFilePath: event.audioPath));
   }
 
-  void _saveReminderMethod(SaveReminderEvent event, Emitter<ReminderState> emit) async {
+  void _saveReminderMethod(SaveReminderEvent event,
+      Emitter<ReminderState> emit) async {
     emit(state.copyWith(status: ReminderStatus.loading));
 
     // Ensure IdGenerator is using a Box<int> for ID generation
-    final idBox = await Hive.openBox<int>('idBox'); // Use a Box<int> for ID generation
+    final idBox = await Hive.openBox<int>(
+        'idBox'); // Use a Box<int> for ID generation
     final idGenerator = IdGenerator(idBox);
 
-    int uniqueNotificationId = DateTime.now().millisecondsSinceEpoch & 0x7FFFFFFF;
+    int uniqueNotificationId = DateTime
+        .now()
+        .millisecondsSinceEpoch & 0x7FFFFFFF;
 
     try {
       // Create the Reminder object
       Reminder reminder = Reminder(
-        reminderID: idGenerator.getNextId(), // Ensure this method works with your ID generator
+        reminderID: idGenerator.getNextId(),
+        // Ensure this method works with your ID generator
         audioFilePath: state.audioFilePath,
         medicineName: state.medicineName,
         dosage: state.dosage,
         medicineType: state.medicineType,
         reminderTime: DateTime(
-          DateTime.now().year,
-          DateTime.now().month,
-          DateTime.now().day,
+          DateTime
+              .now()
+              .year,
+          DateTime
+              .now()
+              .month,
+          DateTime
+              .now()
+              .day,
           state.selectedTime.hour,
           state.selectedTime.minute,
         ),
@@ -130,13 +144,14 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
       debugPrint('Reminder saved: ${reminder.toMap()}');
 
       // Schedule Notifications
-     // for (var day in state.selectedWeekDays) {
+      // for (var day in state.selectedWeekDays) {
       for (var day in reminder.daysOfWeek) {
-        int dayIndex = dayToIndex(day);
+        int dayIndex = day;
         int interval = calculateInterval(reminder.reminderTime, dayIndex);
 
         // Debug print
-        debugPrint('Scheduling notification for $day at interval: $interval seconds');
+        debugPrint(
+            'Scheduling notification for $day at interval: $interval seconds');
 
         // Make sure NotificationService is properly implemented
         await NotificationService.showNotification(
@@ -146,8 +161,14 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
           interval: interval,
           repeat: false,
         );
-
       }
+
+
+      notificationSchedulerHelper.schedulePeriodicNotification(
+          frequency: Duration(days: 1),
+          initialDelay: reminder.reminderTime.difference(DateTime.now()),
+          taskIdentifier: "periodicNotification");
+
 
       emit(state.copyWith(status: ReminderStatus.success));
     } catch (e) {
@@ -159,23 +180,23 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
   }
 
 
-  void _onClickedOnDateEvent(
-      ClickedOnDateEvent event, Emitter<ReminderState> emit) {
+  void _onClickedOnDateEvent(ClickedOnDateEvent event,
+      Emitter<ReminderState> emit) {
     emit(state.copyWith(
       index: event.index,
       currentDate: event.selectedDate,
     ));
   }
 
-  void _onTimeSelectedEvent(
-      TimeSelectedEvent event, Emitter<ReminderState> emit) {
+  void _onTimeSelectedEvent(TimeSelectedEvent event,
+      Emitter<ReminderState> emit) {
     emit(state.copyWith(
       selectedTime: event.selectedTime,
     ));
   }
 
-  void _onMedicineNameChanged(
-      MedicineNameChanged event, Emitter<ReminderState> emit) {
+  void _onMedicineNameChanged(MedicineNameChanged event,
+      Emitter<ReminderState> emit) {
     emit(state.copyWith(medicineName: event.medicineName));
   }
 
@@ -183,37 +204,18 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
     emit(state.copyWith(dosage: event.dosage));
   }
 
-  void _onMedicineTypeChanged(
-      MedicineTypeChanged event, Emitter<ReminderState> emit) {
+  void _onMedicineTypeChanged(MedicineTypeChanged event,
+      Emitter<ReminderState> emit) {
     emit(state.copyWith(medicineType: event.medicineType));
   }
 
-  void _onWeekDaysSelected(
-      WeekDaysSelected event, Emitter<ReminderState> emit) {
+  void _onWeekDaysSelected(WeekDaysSelected event,
+      Emitter<ReminderState> emit) {
     emit(state.copyWith(selectedWeekDays: event.selectedDays));
   }
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // void _saveReminderMethod(

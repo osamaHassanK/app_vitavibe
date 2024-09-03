@@ -132,16 +132,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               label: Text('Mon'),
                               selected: state.selectedWeekDays.contains('Mon'),
                               onSelected: (selected) {
-                                final selectedDays =
-                                    List<String>.from(state.selectedWeekDays);
+
                                 if (selected) {
-                                  selectedDays.add('Mon');
+                                  state.selectedWeekDays.add(1);
                                 } else {
-                                  selectedDays.remove('Mon');
+                                  state.selectedWeekDays.remove(1);
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(selectedDays));
+                                    .add(WeekDaysSelected(state.selectedWeekDays));
                               },
                               labelStyle: TextStyle(
                                   color: Colors.white, fontFamily: 'f'),
@@ -159,16 +158,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               label: Text('Tue'),
                               selected: state.selectedWeekDays.contains('Tue'),
                               onSelected: (selected) {
-                                final selectedDays =
-                                    List<String>.from(state.selectedWeekDays);
+
                                 if (selected) {
-                                  selectedDays.add('Tue');
+                                  state.selectedWeekDays.add(2);
                                 } else {
-                                  selectedDays.remove('Tue');
+                                  state.selectedWeekDays.add(2);
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(selectedDays));
+                                    .add(WeekDaysSelected(state.selectedWeekDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -181,16 +179,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               label: Text('Wed'),
                               selected: state.selectedWeekDays.contains('Wed'),
                               onSelected: (selected) {
-                                final selectedDays =
-                                    List<String>.from(state.selectedWeekDays);
+
                                 if (selected) {
-                                  selectedDays.add('Wed');
+                                  state.selectedWeekDays.add(3);
                                 } else {
-                                  selectedDays.remove('Wed');
+                                  state.selectedWeekDays.remove(3);
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(selectedDays));
+                                    .add(WeekDaysSelected(state.selectedWeekDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -203,16 +200,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               label: Text('Thu'),
                               selected: state.selectedWeekDays.contains('Thu'),
                               onSelected: (selected) {
-                                final selectedDays =
-                                    List<String>.from(state.selectedWeekDays);
+
                                 if (selected) {
-                                  selectedDays.add('Thu');
+                                  state.selectedWeekDays.add(4);
                                 } else {
-                                  selectedDays.remove('Thu');
+                                  state.selectedWeekDays.remove(4);
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(selectedDays));
+                                    .add(WeekDaysSelected(state.selectedWeekDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -225,16 +221,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               label: Text('Fri'),
                               selected: state.selectedWeekDays.contains('Fri'),
                               onSelected: (selected) {
-                                final selectedDays =
-                                    List<String>.from(state.selectedWeekDays);
+
                                 if (selected) {
-                                  selectedDays.add('Fri');
+                                  state.selectedWeekDays.add(5);
                                 } else {
-                                  selectedDays.remove('Fri');
+                                  state.selectedWeekDays.remove(5);
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(selectedDays));
+                                    .add(WeekDaysSelected(state.selectedWeekDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -247,16 +242,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               label: Text('Sat'),
                               selected: state.selectedWeekDays.contains('Sat'),
                               onSelected: (selected) {
-                                final selectedDays =
-                                    List<String>.from(state.selectedWeekDays);
+
                                 if (selected) {
-                                  selectedDays.add('Sat');
+                                  state.selectedWeekDays.add(6);
                                 } else {
-                                  selectedDays.remove('Sat');
+                                  state.selectedWeekDays.remove(6);
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(selectedDays));
+                                    .add(WeekDaysSelected(state.selectedWeekDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -269,16 +263,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               label: Text('Sun'),
                               selected: state.selectedWeekDays.contains('Sun'),
                               onSelected: (selected) {
-                                final selectedDays =
-                                    List<String>.from(state.selectedWeekDays);
+
                                 if (selected) {
-                                  selectedDays.add('Sun');
+                                  state.selectedWeekDays.add(0);
                                 } else {
-                                  selectedDays.remove('Sun');
+                                  state.selectedWeekDays.remove(0);
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(selectedDays));
+                                    .add(WeekDaysSelected(state.selectedWeekDays));
                               },
                             ),
                           ],

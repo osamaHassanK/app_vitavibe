@@ -16,23 +16,22 @@ class ReminderAdapter extends TypeAdapter<Reminder> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-
     return Reminder(
-      reminderID: fields[6] as int? ?? 0,
-      medicineName: fields[0] as String? ?? '',
-      reminderTime: fields[1] as DateTime? ?? DateTime.now(),
-      dosage: fields[2] as String? ?? '',
-      medicineType: fields[3] as String? ?? '',
-      daysOfWeek: (fields[4] as List?)?.cast<String>() ?? [],
-      audioFilePath: fields[5] as String? ?? '',
-      notificationId: fields[7] as int?, // Correctly handle nullable int
+      reminderID: fields[6] as int,
+      medicineName: fields[0] as String,
+      reminderTime: fields[1] as DateTime,
+      dosage: fields[2] as String,
+      medicineType: fields[3] as String,
+      daysOfWeek: (fields[4] as List).cast<int>(),
+      audioFilePath: fields[5] as String,
+      notificationId: fields[7] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Reminder obj) {
     writer
-      ..writeByte(8) // Update the number of fields to match the current model
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.medicineName)
       ..writeByte(1)
@@ -48,7 +47,7 @@ class ReminderAdapter extends TypeAdapter<Reminder> {
       ..writeByte(6)
       ..write(obj.reminderID)
       ..writeByte(7)
-      ..write(obj.notificationId); // Correctly handle nullable int
+      ..write(obj.notificationId);
   }
 
   @override
@@ -57,8 +56,7 @@ class ReminderAdapter extends TypeAdapter<Reminder> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is ReminderAdapter &&
-              runtimeType == other.runtimeType &&
-              typeId == other.typeId;
+      other is ReminderAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
-
