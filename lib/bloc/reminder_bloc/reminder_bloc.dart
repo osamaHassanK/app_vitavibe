@@ -97,39 +97,27 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
   void _selectedSound(AudioFileSelected event, Emitter<ReminderState> emit) {
     emit(state.copyWith(audioFilePath: event.audioPath));
   }
-
-  void _saveReminderMethod(SaveReminderEvent event,
-      Emitter<ReminderState> emit) async {
+  void _saveReminderMethod(SaveReminderEvent event, Emitter<ReminderState> emit) async {
     emit(state.copyWith(status: ReminderStatus.loading));
 
     // Ensure IdGenerator is using a Box<int> for ID generation
-    final idBox = await Hive.openBox<int>(
-        'idBox'); // Use a Box<int> for ID generation
+    final idBox = await Hive.openBox<int>('idBox'); // Use a Box<int> for ID generation
     final idGenerator = IdGenerator(idBox);
 
-    int uniqueNotificationId = DateTime
-        .now()
-        .millisecondsSinceEpoch & 0x7FFFFFFF;
+    int uniqueNotificationId = DateTime.now().millisecondsSinceEpoch & 0x7FFFFFFF;
 
     try {
       // Create the Reminder object
       Reminder reminder = Reminder(
-        reminderID: idGenerator.getNextId(),
-        // Ensure this method works with your ID generator
+        reminderID: idGenerator.getNextId(), // Ensure this method works with your ID generator
         audioFilePath: state.audioFilePath,
         medicineName: state.medicineName,
         dosage: state.dosage,
         medicineType: state.medicineType,
         reminderTime: DateTime(
-          DateTime
-              .now()
-              .year,
-          DateTime
-              .now()
-              .month,
-          DateTime
-              .now()
-              .day,
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
           state.selectedTime.hour,
           state.selectedTime.minute,
         ),
@@ -146,12 +134,11 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
       // Schedule Notifications
       // for (var day in state.selectedWeekDays) {
       for (var day in reminder.daysOfWeek) {
-        int dayIndex = day;
+        int dayIndex = dayToIndex(day);
         int interval = calculateInterval(reminder.reminderTime, dayIndex);
 
         // Debug print
-        debugPrint(
-            'Scheduling notification for $day at interval: $interval seconds');
+        debugPrint('Scheduling notification for $day at interval: $interval seconds');
 
         // Make sure NotificationService is properly implemented
         await NotificationService.showNotification(
@@ -161,14 +148,8 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
           interval: interval,
           repeat: false,
         );
+
       }
-
-
-      notificationSchedulerHelper.schedulePeriodicNotification(
-          frequency: Duration(days: 1),
-          initialDelay: reminder.reminderTime.difference(DateTime.now()),
-          taskIdentifier: "periodicNotification");
-
 
       emit(state.copyWith(status: ReminderStatus.success));
     } catch (e) {
@@ -178,6 +159,87 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
           errorMessage: 'Failed to save reminder. Please try again.'));
     }
   }
+
+  // void _saveReminderMethod(SaveReminderEvent event,
+  //     Emitter<ReminderState> emit) async {
+  //   emit(state.copyWith(status: ReminderStatus.loading));
+  //
+  //   // Ensure IdGenerator is using a Box<int> for ID generation
+  //   final idBox = await Hive.openBox<int>(
+  //       'idBox'); // Use a Box<int> for ID generation
+  //   final idGenerator = IdGenerator(idBox);
+  //
+  //   int uniqueNotificationId = DateTime
+  //       .now()
+  //       .millisecondsSinceEpoch & 0x7FFFFFFF;
+  //
+  //   try {
+  //     // Create the Reminder object
+  //     Reminder reminder = Reminder(
+  //       reminderID: idGenerator.getNextId(),
+  //       // Ensure this method works with your ID generator
+  //       audioFilePath: state.audioFilePath,
+  //       medicineName: state.medicineName,
+  //       dosage: state.dosage,
+  //       medicineType: state.medicineType,
+  //       reminderTime: DateTime(
+  //         DateTime
+  //             .now()
+  //             .year,
+  //         DateTime
+  //             .now()
+  //             .month,
+  //         DateTime
+  //             .now()
+  //             .day,
+  //         state.selectedTime.hour,
+  //         state.selectedTime.minute,
+  //       ),
+  //       daysOfWeek: state.selectedWeekDays,
+  //       notificationId: uniqueNotificationId,
+  //     );
+  //
+  //     // Save the reminder to Hive
+  //     await reminderBox.add(reminder);
+  //
+  //     // Debug print
+  //     debugPrint('Reminder saved: ${reminder.toMap()}');
+  //
+  //     // Schedule Notifications
+  //     // for (var day in state.selectedWeekDays) {
+  //     for (var day in reminder.daysOfWeek) {
+  //       int dayIndex = day;
+  //       int interval = calculateInterval(reminder.reminderTime, dayIndex);
+  //
+  //       // Debug print
+  //       debugPrint(
+  //           'Scheduling notification for $day at interval: $interval seconds');
+  //
+  //       // Make sure NotificationService is properly implemented
+  //       await NotificationService.showNotification(
+  //         title: 'Reminder: ${reminder.medicineName}',
+  //         body: 'Time to take your medicine',
+  //         scheduled: true,
+  //         interval: interval,
+  //         repeat: false,
+  //       );
+  //     }
+  //
+  //
+  //     notificationSchedulerHelper.schedulePeriodicNotification(
+  //         frequency: Duration(days: 1),
+  //         initialDelay: reminder.reminderTime.difference(DateTime.now()),
+  //         taskIdentifier: "periodicNotification");
+  //
+  //
+  //     emit(state.copyWith(status: ReminderStatus.success));
+  //   } catch (e) {
+  //     debugPrint('Error saving reminder: ${e.toString()}');
+  //     emit(state.copyWith(
+  //         status: ReminderStatus.error,
+  //         errorMessage: 'Failed to save reminder. Please try again.'));
+  //   }
+  // }
 
 
   void _onClickedOnDateEvent(ClickedOnDateEvent event,

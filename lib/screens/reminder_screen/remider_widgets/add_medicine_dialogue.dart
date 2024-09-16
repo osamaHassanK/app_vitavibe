@@ -132,20 +132,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               label: Text('Mon'),
                               selected: state.selectedWeekDays.contains('Mon'),
                               onSelected: (selected) {
-
+                                final selectedDays =
+                                List<String>.from(state.selectedWeekDays);
                                 if (selected) {
-                                  state.selectedWeekDays.add(1);
+                                  selectedDays.add('Mon');
                                 } else {
-                                  state.selectedWeekDays.remove(1);
+                                  selectedDays.remove('Mon');
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(state.selectedWeekDays));
+                                    .add(WeekDaysSelected(selectedDays));
                               },
                               labelStyle: TextStyle(
                                   color: Colors.white, fontFamily: 'f'),
                               selectedColor:
-                                  Colors.green, // Color for the selected state
+                              Colors.green, // Color for the selected state
                               backgroundColor: Colors.black,
                             ),
                             SizedBox(width: 8),
@@ -153,20 +154,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               labelStyle: TextStyle(
                                   color: Colors.white, fontFamily: 'f'),
                               selectedColor:
-                                  Colors.green, // Color for the selected state
+                              Colors.green, // Color for the selected state
                               backgroundColor: Colors.black,
                               label: Text('Tue'),
                               selected: state.selectedWeekDays.contains('Tue'),
                               onSelected: (selected) {
-
+                                final selectedDays =
+                                List<String>.from(state.selectedWeekDays);
                                 if (selected) {
-                                  state.selectedWeekDays.add(2);
+                                  selectedDays.add('Tue');
                                 } else {
-                                  state.selectedWeekDays.add(2);
+                                  selectedDays.remove('Tue');
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(state.selectedWeekDays));
+                                    .add(WeekDaysSelected(selectedDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -174,20 +176,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               labelStyle: TextStyle(
                                   color: Colors.white, fontFamily: 'f'),
                               selectedColor:
-                                  Colors.green, // Color for the selected state
+                              Colors.green, // Color for the selected state
                               backgroundColor: Colors.black,
                               label: Text('Wed'),
                               selected: state.selectedWeekDays.contains('Wed'),
                               onSelected: (selected) {
-
+                                final selectedDays =
+                                List<String>.from(state.selectedWeekDays);
                                 if (selected) {
-                                  state.selectedWeekDays.add(3);
+                                  selectedDays.add('Wed');
                                 } else {
-                                  state.selectedWeekDays.remove(3);
+                                  selectedDays.remove('Wed');
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(state.selectedWeekDays));
+                                    .add(WeekDaysSelected(selectedDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -195,20 +198,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               labelStyle: TextStyle(
                                   color: Colors.white, fontFamily: 'f'),
                               selectedColor:
-                                  Colors.green, // Color for the selected state
+                              Colors.green, // Color for the selected state
                               backgroundColor: Colors.black,
                               label: Text('Thu'),
                               selected: state.selectedWeekDays.contains('Thu'),
                               onSelected: (selected) {
-
+                                final selectedDays =
+                                List<String>.from(state.selectedWeekDays);
                                 if (selected) {
-                                  state.selectedWeekDays.add(4);
+                                  selectedDays.add('Thu');
                                 } else {
-                                  state.selectedWeekDays.remove(4);
+                                  selectedDays.remove('Thu');
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(state.selectedWeekDays));
+                                    .add(WeekDaysSelected(selectedDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -216,20 +220,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               labelStyle: TextStyle(
                                   color: Colors.white, fontFamily: 'f'),
                               selectedColor:
-                                  Colors.green, // Color for the selected state
+                              Colors.green, // Color for the selected state
                               backgroundColor: Colors.black,
                               label: Text('Fri'),
                               selected: state.selectedWeekDays.contains('Fri'),
                               onSelected: (selected) {
-
+                                final selectedDays =
+                                List<String>.from(state.selectedWeekDays);
                                 if (selected) {
-                                  state.selectedWeekDays.add(5);
+                                  selectedDays.add('Fri');
                                 } else {
-                                  state.selectedWeekDays.remove(5);
+                                  selectedDays.remove('Fri');
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(state.selectedWeekDays));
+                                    .add(WeekDaysSelected(selectedDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -237,20 +242,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               labelStyle: TextStyle(
                                   color: Colors.white, fontFamily: 'f'),
                               selectedColor:
-                                  Colors.green, // Color for the selected state
+                              Colors.green, // Color for the selected state
                               backgroundColor: Colors.black,
                               label: Text('Sat'),
                               selected: state.selectedWeekDays.contains('Sat'),
                               onSelected: (selected) {
-
+                                final selectedDays =
+                                List<String>.from(state.selectedWeekDays);
                                 if (selected) {
-                                  state.selectedWeekDays.add(6);
+                                  selectedDays.add('Sat');
                                 } else {
-                                  state.selectedWeekDays.remove(6);
+                                  selectedDays.remove('Sat');
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(state.selectedWeekDays));
+                                    .add(WeekDaysSelected(selectedDays));
                               },
                             ),
                             SizedBox(width: 8),
@@ -258,20 +264,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               labelStyle: TextStyle(
                                   color: Colors.white, fontFamily: 'f'),
                               selectedColor:
-                                  Colors.green, // Color for the selected state
+                              Colors.green, // Color for the selected state
                               backgroundColor: Colors.black,
                               label: Text('Sun'),
                               selected: state.selectedWeekDays.contains('Sun'),
                               onSelected: (selected) {
-
+                                final selectedDays =
+                                List<String>.from(state.selectedWeekDays);
                                 if (selected) {
-                                  state.selectedWeekDays.add(0);
+                                  selectedDays.add('Sun');
                                 } else {
-                                  state.selectedWeekDays.remove(0);
+                                  selectedDays.remove('Sun');
                                 }
                                 context
                                     .read<ReminderBloc>()
-                                    .add(WeekDaysSelected(state.selectedWeekDays));
+                                    .add(WeekDaysSelected(selectedDays));
                               },
                             ),
                           ],
@@ -350,90 +357,10 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                           ),
                         ],
                       ),
-                      // TextWidget(text: "Notification Sound", fontSize: 18),
-                      // Row(
-                      //   children: [
-                      //     InkWell(
-                      //       onTap: () async {
-                      //         final result =
-                      //             await FilePicker.platform.pickFiles(
-                      //           type: FileType.audio,
-                      //         );
-                      //
-                      //         if (result != null && result.files.isNotEmpty) {
-                      //           final audioPath = result.files.single.path;
-                      //           if (audioPath != null) {
-                      //             context
-                      //                 .read<ReminderBloc>()
-                      //                 .add(AudioFileSelected(audioPath));
-                      //           }
-                      //         }
-                      //       },
-                      //       child: Container(
-                      //         padding: EdgeInsets.all(10),
-                      //         decoration: BoxDecoration(
-                      //           color: Colors.black,
-                      //           borderRadius: BorderRadius.circular(5),
-                      //         ),
-                      //         child: Text(
-                      //           'Select Audio',
-                      //           style: TextStyle(
-                      //               color: Colors.white, fontFamily: 'f'),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     SizedBox(width: 10),
-                      //     Container(
-                      //       width: dimensions.width * 0.45,
-                      //       height: dimensions.height * 0.05,
-                      //       decoration: BoxDecoration(
-                      //         borderRadius: BorderRadius.circular(8),
-                      //         color: state.audioFilePath.isNotEmpty
-                      //             ? Colors.green
-                      //             : Colors.black,
-                      //       ),
-                      //       child: Center(
-                      //         child: Text(
-                      //           state.audioFilePath.isNotEmpty
-                      //               ? '${state.audioFilePath.split('/').last}'
-                      //               : 'No audio selected',
-                      //           overflow: TextOverflow.ellipsis,
-                      //           style: TextStyle(
-                      //               color: Colors.white,
-                      //               fontFamily: 'f',
-                      //               fontSize: 16),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                       SizedBox(height: 20),
                       Center(
                         child: GlowingButton(
                           onPressed: () async {
-                            // DateTime selectedDate = DateTime.now(); // Use the current date or provide a specific date
-                            //
-                            // DateTime dateTime = DateTime(
-                            //   selectedDate.year,
-                            //   selectedDate.month,
-                            //   selectedDate.day,
-                            //   state.selectedTime.hour,
-                            //   state.selectedTime.minute,
-                            // );
-                            //
-                            // Alarm.set(alarmSettings: AlarmSettings(
-                            //   id: 42,
-                            //   dateTime: dateTime, // Use the combined DateTime here
-                            //   assetAudioPath: 'assets/sound/reminderSound.mp3',
-                            //   loopAudio: true,
-                            //   vibrate: true,
-                            //   volume: 0.8,
-                            //   fadeDuration: 3.0,
-                            //   notificationTitle: 'This is the title',
-                            //   notificationBody: 'This is the body',
-                            //   enableNotificationOnKill: true,
-                            // ));
-
                             if ((_formKey.currentState?.validate() ?? false) && state.selectedWeekDays.isNotEmpty) {
                               context.read<ReminderBloc>().add(SaveReminderEvent());
                               Navigator.pushNamed(context, '/dashboard');
@@ -454,18 +381,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                         ),
                       ),
 
-                  // ==>  alarm package testing
-
-                      // Center(
-                      //   child: GlowingButton(
-                      //     onPressed: () async {
-                      //       await Alarm.stop(42);
-                      //     },
-                      //     title: 'Submit',
-                      //     height: dimensions.height * 0.08,
-                      //     width: dimensions.width * 0.4,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -476,22 +391,4 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
       ),
     );
   }
-  // Future<void> handleNotification(String audioFilePath) async {
-  //   // Play the audio file
-  //   await testAudioPlayback(audioFilePath);
-  //
-  //   // Convert local file path to URI if needed
-  //   if (audioFilePath.contains('/')) {
-  //     audioFilePath = Uri.file(audioFilePath).toString();
-  //   }
-  //
-  //   // Show notification
-  //   await NotificationService.showNotification(
-  //     title: 'Medicine Reminder',
-  //     body: 'Time to take your medicine.',
-  //     soundSource: audioFilePath,
-  //     scheduled: true,
-  //     interval: 6, // example interval
-  //   );
-  // }
 }

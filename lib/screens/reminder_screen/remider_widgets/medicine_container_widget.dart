@@ -1,5 +1,4 @@
 import 'package:app_vitavibe/other/app_dimensions/app_dimensions.dart';
-import 'package:app_vitavibe/other/notification_service/notification_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -70,48 +69,36 @@ Widget medicineContainerWidget({context,required String medicineImage,medicineNa
 
             ],
           ),
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: _getSortedWeekDays(weekDays).map((day) {
-            return Container(
-              margin: EdgeInsets.only(right: 4),
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: Colors.black,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: _getSortedWeekDays(weekDays).map((day) {
+                  return Container(
+                    margin: EdgeInsets.only(right: 4),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.black,
+                    ),
+                    child: Text(
+                      day,
+                      style: TextStyle(fontSize: 12, fontFamily: 'f', color: Colors.white),
+                    ),
+                  );
+                }).toList(),
               ),
-              child: Text(
-                  getWeekDay(day),
-                style: TextStyle(fontSize: 12, fontFamily: 'f', color: Colors.white),
-              ),
-            );
-          }).toList(),
-        ),
-      ),
-    ),
-    ],
+            ),
+          ),
+        ],
       ),
     ),
   );
 }
 
-getWeekDay(int index){
-  switch (index) {
-    case DateTime.sunday: "Sun";
-    case DateTime.monday: return "Mon";
-    case DateTime.tuesday: return "Tue";
-    case DateTime.wednesday: return "Wed";
-    case DateTime.thursday: return "Thu";
-    case DateTime.friday: return "Fri";
-    case DateTime.saturday: return "Sat";
-    default: return DateTime.monday; // Default to Monday if invalid day
-  }
-}
 List<dynamic> _getSortedWeekDays(List<dynamic> weekDays) {
   List<dynamic> allWeekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 

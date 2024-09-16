@@ -22,7 +22,7 @@ class ReminderAdapter extends TypeAdapter<Reminder> {
       reminderTime: fields[1] as DateTime,
       dosage: fields[2] as String,
       medicineType: fields[3] as String,
-      daysOfWeek: (fields[4] as List).cast<int>(),
+      daysOfWeek: (fields[4] as List).cast<String>(),
       audioFilePath: fields[5] as String,
       notificationId: fields[7] as int?,
     );

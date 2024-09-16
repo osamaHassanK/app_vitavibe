@@ -7,7 +7,7 @@ class ReminderState extends Equatable {
   final String medicineName;
   final String dosage;
   final String medicineType;
-  final List<int> selectedWeekDays;
+  final List<String> selectedWeekDays;
   final ReminderStatus status;
   final String? errorMessage;
   final String audioFilePath;
@@ -20,7 +20,7 @@ class ReminderState extends Equatable {
     this.medicineName = '',
     this.dosage = '',
     this.medicineType = '',
-    List<int>? selectedWeekDays,
+    List<String>? selectedWeekDays,
     this.status = ReminderStatus.initial,
     this.errorMessage,
     required this.audioFilePath,
@@ -36,7 +36,7 @@ class ReminderState extends Equatable {
     String? medicineName,
     String? dosage,
     String? medicineType,
-    List<int>? selectedWeekDays,
+    List<String>? selectedWeekDays,
     ReminderStatus? status,
     String? errorMessage,
     String? audioFilePath,

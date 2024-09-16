@@ -17,7 +17,7 @@ class Reminder extends HiveObject {
   final String medicineType;
 
   @HiveField(4)
-  final List<int> daysOfWeek;
+  final List<String> daysOfWeek;
 
   @HiveField(5)
   final String audioFilePath;
@@ -58,7 +58,7 @@ class Reminder extends HiveObject {
       reminderTime: map['reminderTime'],
       dosage: map['dosage'],
       medicineType: map['medicineType'],
-      daysOfWeek: List<int>.from(map['daysOfWeek']),
+      daysOfWeek: List<String>.from(map['daysOfWeek']),
       audioFilePath: map['audioFilePath'],
       reminderID: map['reminderID'],
       notificationId: map['notificationId']

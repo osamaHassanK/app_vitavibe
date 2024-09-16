@@ -152,22 +152,6 @@ class ReminderScreen extends StatelessWidget {
                     );
                   },
                 ),
-
-
-                // GlowingButton(onPressed: () {
-                //   final notiTest = FlutterLocalNotification();
-                //   int id =0 ;
-                //   final soundFilePath = '/data/user/0/com.example.app_vitavibe/cache/file_picker/1722600419670/alberto_delrio.mp3'; // Replace with the actual path
-                //   final scheduledDate =
-                //   tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5));
-                //   print('scehdule time $scheduledDate');
-                //  notiTest.scheduleNotification(
-                //      scheduledDate:scheduledDate ,
-                //      soundFilePath: soundFilePath);
-                //
-                // }, title: 'test notification', height:50, width: 100,),
-                //
-            
               ],
             ),
           ),
